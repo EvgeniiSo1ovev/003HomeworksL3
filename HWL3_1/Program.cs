@@ -22,6 +22,18 @@ bool ValidateNumber(int num)
 
 bool IsPalindrom(int num)
 {
+    countNum = 0;
+    while (true)
+    {
+        if (countNum)
+        {
+            countNum++;
+        }
+        else
+        {
+            break;
+        }
+    }
     int n1 = num /10000;
     int n2 = num /1000 % 10;
     //int n3 = num /100 % 10;
