@@ -20,30 +20,37 @@ bool ValidateNumber(int num)
     return false;
 }
 
-bool IsPalindrom(int num)
+int LengthOfNumber(int num)
 {
-    countNum = 0;
+    int lengthNum = 1;
     while (true)
     {
-        if (countNum)
+        num = num / 10;
+        if (num > 0)
         {
-            countNum++;
+            lengthNum++;
         }
         else
         {
             break;
         }
     }
-    int n1 = num /10000;
-    int n2 = num /1000 % 10;
-    //int n3 = num /100 % 10;
-    int n4 = num /10 % 10;
-    int n5 = num % 10;
-    if(n1 == n5 && n2 == n4)
+    return lengthNum;
+}
+
+bool IsPalindrom(int num)
+{
+    int N = LengthOfNumber(num);
+    for (int i = 0; i < (N-1)/2; i++)
     {
-        return true;
+        v1 = num / Math.Pow(10, N - 1 - i) % 10;
+        v2 = num / Math.Pow(10, i) % 10;
+        if (v1 != v2)
+        {
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 int number = Promt("Введите пятизначное число");
