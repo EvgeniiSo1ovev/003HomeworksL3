@@ -1,8 +1,8 @@
-﻿// Задача 1 Напишите программу, которая принимает на вход пятизначное число 
+﻿// Задача 1 Напишите программу, которая принимает на вход любое целое число 
 // и проверяет, является ли оно палиндромом. Не использовать строки
-// 14212 -> нет
-// 12821 -> да
-// 23432 -> да
+// 5142125 -> нет
+// 6128216 -> да
+// 782343287 -> да
 
 int Promt(string message)
 {
@@ -12,15 +12,15 @@ int Promt(string message)
 
 bool ValidateNumber(int num)
 {
-    if(num >= 10000 && num < 100000)
+    if (num < 10)
     {
-        return true;
+        System.Console.WriteLine("Введенное число должно быть минимум двухзначным");
+        return false;
     }
-    System.Console.WriteLine("Введенное число не пятизначное");
-    return false;
+    return true;
 }
 
-int LengthOfNumber(int num)
+int LengthOfNumber(int num) // функция определения длины числа
 {
     int lengthNum = 1;
     while (true)
@@ -38,13 +38,23 @@ int LengthOfNumber(int num)
     return lengthNum;
 }
 
-bool IsPalindrom(int num)
+int Degree(int x, int y) // функция возведения числа x в степень y, при этом y - неотрицательное число
+{
+    int result = 1;
+    for (int i = 1; i <= y; i++)
+    {
+        result = result * x;
+    }
+    return result;
+}
+
+bool IsPalindrom(int num) // функция определения, является ли число палиндромом
 {
     int N = LengthOfNumber(num);
-    for (int i = 0; i < (N-1)/2; i++)
+    for (int i = 0; i <= (N - 1) / 2; i++)
     {
-        v1 = num / Math.Pow(10, N - 1 - i) % 10;
-        v2 = num / Math.Pow(10, i) % 10;
+        int v1 = num / Degree(10, N - 1 - i) % 10;
+        int v2 = num / Degree(10, i) % 10;
         if (v1 != v2)
         {
             return false;
@@ -53,10 +63,10 @@ bool IsPalindrom(int num)
     return true;
 }
 
-int number = Promt("Введите пятизначное число");
-if(ValidateNumber(number))
+int number = Promt("Введите целое число");
+if (ValidateNumber(number))
 {
-    if(IsPalindrom(number))
+    if (IsPalindrom(number))
     {
         System.Console.WriteLine($"Число {number} является палиндромом");
     }
