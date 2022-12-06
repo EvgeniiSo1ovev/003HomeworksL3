@@ -1,8 +1,8 @@
-﻿// Задача 1 Напишите программу, которая принимает на вход пятизначное число 
+﻿// Задача 1 Напишите программу, которая принимает на вход любое целое число 
 // и проверяет, является ли оно палиндромом. Не использовать строки
-// 14212 -> нет
-// 12821 -> да
-// 23432 -> да
+// 5142125 -> нет
+// 6128216 -> да
+// 782343287 -> да
 
 int Promt(string message)
 {
@@ -12,32 +12,61 @@ int Promt(string message)
 
 bool ValidateNumber(int num)
 {
-    if(num >= 10000 && num < 100000)
+    if (num < 10)
     {
-        return true;
+        System.Console.WriteLine("Введенное число должно быть минимум двухзначным");
+        return false;
     }
-    System.Console.WriteLine("Введенное число не пятизначное");
-    return false;
+    return true;
 }
 
-bool IsPalindrom(int num)
+int LengthOfNumber(int num) // функция определения длины числа
 {
-    int n1 = num /10000;
-    int n2 = num /1000 % 10;
-    //int n3 = num /100 % 10;
-    int n4 = num /10 % 10;
-    int n5 = num % 10;
-    if(n1 == n5 && n2 == n4)
+    int lengthNum = 1;
+    while (true)
     {
-        return true;
+        num = num / 10;
+        if (num > 0)
+        {
+            lengthNum++;
+        }
+        else
+        {
+            break;
+        }
     }
-    return false;
+    return lengthNum;
 }
 
-int number = Promt("Введите пятизначное число");
-if(ValidateNumber(number))
+int Degree(int x, int y) // функция возведения числа x в степень y, при этом y - неотрицательное число
 {
-    if(IsPalindrom(number))
+    int result = 1;
+    for (int i = 1; i <= y; i++)
+    {
+        result = result * x;
+    }
+    return result;
+}
+
+bool IsPalindrom(int num) // функция определения, является ли число палиндромом
+{
+    int N = LengthOfNumber(num);
+    for (int i = 0; i <= (N - 1) / 2; i++)
+    {
+        int v1 = num / Degree(10, N - 1 - i) % 10;
+        int v2 = num / Degree(10, i) % 10;
+        if (v1 != v2)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int number = Promt("Введите целое число");
+if (ValidateNumber(number))
+{
+    if (IsPalindrom(number))
     {
         System.Console.WriteLine($"Число {number} является палиндромом");
     }
