@@ -1,4 +1,4 @@
-﻿// Задача 1 Напишите программу, которая принимает на вход пятизначное число 
+﻿// Задача 1 Напишите программу, которая принимает на вход любое число 
 // и проверяет, является ли оно палиндромом. Не использовать строки
 // 14212 -> нет
 // 12821 -> да
@@ -10,39 +10,34 @@ int Promt(string message)
     return Convert.ToInt32(Console.ReadLine());
 }
 
-bool ValidateNumber(int num)
+int Reverse(int number)
 {
-    if(num >= 10000 && num < 100000)
+    int answer = 0;
+    while (number > 0)
     {
-        return true;
+        answer = answer * 10 + number % 10;
+        number = number / 10; // number /=10
     }
-    System.Console.WriteLine("Введенное число не пятизначное");
-    return false;
+    return answer;
 }
 
 bool IsPalindrom(int num)
 {
-    int n1 = num /10000;
-    int n2 = num /1000 % 10;
-    //int n3 = num /100 % 10;
-    int n4 = num /10 % 10;
-    int n5 = num % 10;
-    if(n1 == n5 && n2 == n4)
-    {
-        return true;
-    }
-    return false;
+    //if(num == Reverse(num))
+    //{
+    //    return true;
+    //}
+    //return false;
+    //нижнее заменяет всё верхнее
+    return num == Reverse(num)
 }
 
 int number = Promt("Введите пятизначное число");
-if(ValidateNumber(number))
+if(IsPalindrom(number))
 {
-    if(IsPalindrom(number))
-    {
-        System.Console.WriteLine($"Число {number} является палиндромом");
-    }
-    else
-    {
-        System.Console.WriteLine($"Число {number} не является палиндромом");
-    }
+    System.Console.WriteLine($"Число {number} является палиндромом");
+}
+else
+{
+    System.Console.WriteLine($"Число {number} не является палиндромом");
 }
